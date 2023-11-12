@@ -1,4 +1,3 @@
-
 //Authors: Rohan Vaidya, Omar Aly, Samuel Dasilva, Nabil Barkallah
 #include <iostream>
 #include <string>
@@ -11,296 +10,302 @@ using std::string;
 
 
 class PayKind { // base class - no member variables
-	public:
-		void output(ostream& out) const { out << *this; }
+public:
+	void output(ostream& out) const { out << *this; }
 
 	friend ostream& operator<< (ostream&, const PayKind&);
 };
 
 class Salaried : public PayKind { // derived class
-	public:
-		// constructors/destructor
-	    Salaried() : _annualSalary(0) {}
-	    Salaried(unsigned salary) : _annualSalary(salary) {}
-		~Salaried() { cout << "Salaried destructor called\n"; }
+public:
+	// constructors/destructor
+	Salaried() : _annualSalary(0) {}
+	Salaried(unsigned salary) : _annualSalary(salary) {}
+	~Salaried() { cout << "Salaried destructor called\n"; }
 
-		// accessor functions
-		unsigned getSalary() const { return _annualSalary; }
+	// accessor functions
+	unsigned getSalary() const { return _annualSalary; }
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
 	friend ostream& operator<< (ostream&, const Salaried&);
 
-	private:
-		unsigned _annualSalary;
+private:
+	unsigned _annualSalary;
 };
 
 
 class Hourly : public PayKind { // derived class
-	public:
-		// constructors/destructor
-	    Hourly() : _hourlyRate(0) {}
-	    Hourly(unsigned hourlyRate) : _hourlyRate(hourlyRate) {}
-		~Hourly() { cout << "Hourly destructor called\n"; }
+public:
+	// constructors/destructor
+	Hourly() : _hourlyRate(0) {}
+	Hourly(unsigned hourlyRate) : _hourlyRate(hourlyRate) {}
+	~Hourly() { cout << "Hourly destructor called\n"; }
 
-		// accessor functions
-		unsigned getHourlyRate() const { return _hourlyRate; }
+	// accessor functions
+	unsigned getHourlyRate() const { return _hourlyRate; }
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
 	friend ostream& operator<< (ostream&, const Hourly&);
 
-	private:
-		unsigned _hourlyRate;
+private:
+	unsigned _hourlyRate;
 };
 
 
 ostream& operator<< (ostream& out, const PayKind& p) {
-    out << "Paykind (no member variables)\n" << endl;
+	out << "Paykind (no member variables)\n" << endl;
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const Salaried& s) {
-    out << "Salary:\t\t" << s.getSalary() << endl;
+	out << "Salary:\t\t" << s.getSalary() << endl;
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const Hourly& s) {
-    out << "Hourly Rate:\t" << s.getHourlyRate() << endl;
+	out << "Hourly Rate:\t" << s.getHourlyRate() << endl;
 
-    return out;
+	return out;
 }
 
 
 class UMLPerson { // base class
-	public:
-		// constructors and destructor
-	    UMLPerson() : _firstName("NoName"), _lastName("NoName"), _address("NoAddress"), _IDNumber_(0) {}
+public:
+	// constructors and destructor
+	UMLPerson() : _firstName("NoName"), _lastName("NoName"), _address("NoAddress"), _IDNumber_(0) {}
 
-        UMLPerson(string firstName, string lastName, string address, unsigned _IDNumber) :
-			_firstName(firstName), _lastName(lastName), _address(address), _IDNumber_(_IDNumber) {}
+	UMLPerson(string firstName, string lastName, string address, unsigned _IDNumber) :
+		_firstName(firstName), _lastName(lastName), _address(address), _IDNumber_(_IDNumber) {}
 
-		UMLPerson(const UMLPerson&); // copy constructor
+	UMLPerson(const UMLPerson&); // copy constructor
 
-		~UMLPerson();
+	~UMLPerson();
 
-		// accessor functions
-	    string getFirstName() const { return _firstName; }
-        string getLastName() const { return _lastName; }
-		string getAddress() const { return _address; }
-		unsigned get_IDNumber() const { return _IDNumber_; }
+	// accessor functions
+	string getFirstName() const { return _firstName; }
+	string getLastName() const { return _lastName; }
+	string getAddress() const { return _address; }
+	unsigned get_IDNumber() const { return _IDNumber_; }
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
 	friend ostream& operator<< (ostream&, const UMLPerson&);
 
-	private:
-	    string _firstName;
-        string _lastName;
-        string _address;
-		unsigned _IDNumber_;
+private:
+	string _firstName;
+	string _lastName;
+	string _address;
+	unsigned _IDNumber_;
 };
 
 
 class Student : public UMLPerson { // derived class
-    public:
-		// constructors and destructor
-        Student() : UMLPerson() { _GPA = 0.0; _smajor = "Undeclared"; _advisorName = "NoName"; }
+public:
+	// constructors and destructor
+	Student() : UMLPerson() { _GPA = 0.0; _smajor = "Undeclared"; _advisorName = "NoName"; }
 
-        Student(string firstName, string lastName, string address, unsigned _IDNumber,
-                double GPA, string smajor, string advisorName);
+	Student(string firstName, string lastName, string address, unsigned _IDNumber,
+		double GPA, string smajor, string advisorName);
 
-	    Student(const Student&); // copy constructor
+	Student(const Student&); // copy constructor
 
-		~Student();
+	~Student();
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
-		// accessor functions
-	    double getGPA() const { return _GPA; }
-        string getSmajor() const { return _smajor; }
-		string getAdvisorName() const { return _advisorName; }
+	// accessor functions
+	double getGPA() const { return _GPA; }
+	string getSmajor() const { return _smajor; }
+	string getAdvisorName() const { return _advisorName; }
 
 	friend ostream& operator<< (ostream&, const Student&);
 
-    private:
-		double _GPA;
-        string _smajor;
-        string _advisorName;
+private:
+	double _GPA;
+	string _smajor;
+	string _advisorName;
 };
 
 
 class Undergrad : public Student { // derived class
-    public:
-		// constructors and destructor
-        Undergrad() : Student() { _classRank = "NoRank"; }
+public:
+	// constructors and destructor
+	Undergrad() : Student() { _classRank = "NoRank"; }
 
-        Undergrad(string firstName, string lastName, string address, unsigned _IDNumber,
-                double GPA, string smajor, string advisorName, string classRank);
+	Undergrad(string firstName, string lastName, string address, unsigned _IDNumber,
+		double GPA, string smajor, string advisorName, string classRank);
 
-	    Undergrad(const Undergrad&); // copy constructor
+	Undergrad(const Undergrad&); // copy constructor
 
-		~Undergrad();
+	~Undergrad();
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
-		// accessor functions
-		string getClassRank() const { return _classRank; }
+	// accessor functions
+	string getClassRank() const { return _classRank; }
 
 	friend ostream& operator<< (ostream&, const Undergrad&);
 
-    private:
-		string _classRank; // freshman, sophomore, junior, or senior
+private:
+	string _classRank; // freshman, sophomore, junior, or senior
 };
 
 
 class Grader : public Undergrad, public Hourly { // derived class
-    public:
-		// constructors and destructor
-        Grader() : Undergrad() { _classNumber = "NoClassNumber"; }
+public:
+	// constructors and destructor
+	Grader() : Undergrad() { _classNumber = "NoClassNumber"; }
 
-        Grader(string firstName, string lastName, string address, unsigned _IDNumber,
-               double GPA, string smajor, string advisorName, string classRank,
-			   string classNumber, unsigned hourlyRate);
+	Grader(string firstName, string lastName, string address, unsigned _IDNumber,
+		double GPA, string smajor, string advisorName, string classRank,
+		string classNumber, unsigned hourlyRate);
 
-	    Grader(const Grader&); // copy constructor
+	Grader(const Grader&); // copy constructor
 
-		~Grader();
+	~Grader();
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
-		// accessor functions
-		string getClassNumber() const { return _classNumber; }
+	// accessor functions
+	string getClassNumber() const { return _classNumber; }
 
 	friend ostream& operator<< (ostream&, const Grader&);
 
-    private:
-		string _classNumber; // e.g., COMP.2010
+private:
+	string _classNumber; // e.g., COMP.2010
 };
 
 
 class Employee : public UMLPerson { // derived class
-    public:
-		// constructors and destructor
-        Employee() : UMLPerson() { _SSN = "NoSSN"; }
+public:
+	// constructors and destructor
+	Employee() : UMLPerson() { _SSN = "NoSSN"; }
 
-        Employee(string firstName, string lastName, string address, unsigned _IDNumber,
-				 string SSN);
+	Employee(string firstName, string lastName, string address, unsigned _IDNumber,
+		string SSN);
 
-//	    Employee(const Employee&); // copy constructor
+	//	    Employee(const Employee&); // copy constructor
 
-		~Employee() { cout << "Employee destructor called\n"; }
+	~Employee() { cout << "Employee destructor called\n"; }
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
-		// accessor functions
-		string getSSN() const { return _SSN; }
+	// accessor functions
+	string getSSN() const { return _SSN; }
 
 	friend ostream& operator<< (ostream&, const Employee&);
 
-    private:
-        string _SSN;
+private:
+	string _SSN;
 };
 
 
 class Faculty : public Employee { // derived class
-    public:
-		// constructors and destructor
-        Faculty() : Employee() { _department = "NoDepartment"; }
+public:
+	// constructors and destructor
+	Faculty() : Employee() { _department = "NoDepartment"; }
 
-        Faculty(string firstName, string lastName, string address, unsigned _IDNumber,
-				string SSN, string department);
+	Faculty(string firstName, string lastName, string address, unsigned _IDNumber,
+		string SSN, string department);
 
-//	    Faculty(const Faculty&); // copy constructor
+	//	    Faculty(const Faculty&); // copy constructor
 
-		~Faculty() { cout << "Faculty destructor called for " << getFirstName() + " " + getLastName() << endl; }
+	~Faculty() { cout << "Faculty destructor called for " << getFirstName() + " " + getLastName() << endl; }
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
-		// accessor functions
-		string getDepartment() const { return _department; }
+	// accessor functions
+	string getDepartment() const { return _department; }
 
 	friend ostream& operator<< (ostream&, const Faculty&);
 
-    private:
-        string _department;
+private:
+	string _department;
 };
 
 
 class NTT : public Faculty, public Salaried { // derived class
-    public:
-		// constructors and destructor
-        NTT() : Faculty(), Salaried() { _rank = "NoRank"; }
+public:
+	// constructors and destructor
+	NTT() : Faculty(), Salaried() { _rank = "NoRank"; }
 
-        NTT(string firstName, string lastName, string address, unsigned _IDNumber,
-			string SSN, string department, string rank, unsigned salary);
+	NTT(string firstName, string lastName, string address, unsigned _IDNumber,
+		string SSN, string department, string rank, unsigned salary);
 
-//	    NTT(const Faculty&); // copy constructor
+	//	    NTT(const Faculty&); // copy constructor
 
-		~NTT() { cout << "NTT destructor called for " << getFirstName() + " " + getLastName() << endl; }
+	~NTT() { cout << "NTT destructor called for " << getFirstName() + " " + getLastName() << endl; }
 
-		void output(ostream& out) const { out << *this; }
+	void output(ostream& out) const { out << *this; }
 
-		// accessor functions
-		string getRank() const { return _rank; }
+	// accessor functions
+	string getRank() const { return _rank; }
 
 	friend ostream& operator<< (ostream&, const NTT&);
 
-    private:
-        string _rank; // lecturer or senior lecturer
+private:
+	string _rank; // lecturer or senior lecturer
 };
 // Our Implementation
 class PerCourse : public PayKind {
 public:
-    PerCourse(): _feePerCourse(0){}
-    PerCourse(unsigned feePerCourse): _feePerCourse(feePerCourse){}
+	PerCourse() : _feePerCourse(0) {}
+	PerCourse(unsigned feePerCourse) : _feePerCourse(feePerCourse) {}
+	PerCourse(PerCourse& copyObj) : _feePerCourse(copyObj._feePerCourse) {}
+	unsigned get_fee() { return _feePerCourse; }
+	friend ostream& operator<< (ostream& out, const PerCourse& c);
+	void output(ostream& out) const { out << *this; }
 private:
-    unsigned int _feePerCourse;
+	unsigned int _feePerCourse;
 };
-
 
 class EmployeeKind
 {
 public:
-    void output(ostream& out) const { out << *this; }
-    friend ostream& operator<< (ostream&, const EmployeeKind&);
+	void output(ostream& out) const { out << *this; }
+	friend ostream& operator<< (ostream& out, const EmployeeKind& e);
 };
 
 class PartTime : public EmployeeKind
 {
 public:
-    PartTime() : _maxHours(0){}
-    PartTime(unsigned int maxHours) :  _maxHours(maxHours){}
-    int getHours() const {return _maxHours;}
+	PartTime() : EmployeeKind(), _maxHours(){};
+	PartTime(unsigned int maxHours) : EmployeeKind(), _maxHours(maxHours) {}
+	int getHours() const { return _maxHours; }
+	unsigned int get_maxHours() const { return _maxHours; }
+	friend ostream& operator<< (ostream& out, const PartTime& p);
+	void output(ostream& out) const { out << *this; }
 private:
-    unsigned int _maxHours;
+	unsigned int _maxHours;
 };
 
 class Adjunct : public Faculty, public PerCourse, public PartTime
 {
 public:
-    Adjunct() : Faculty(), PerCourse(), PartTime(), _maxCourses(0) {}
-    Adjunct(string firstName, string lastName, string address, unsigned IDNumber,
-            string SSN, string department, unsigned int feePerCourse, unsigned int maxHours, unsigned int maxCourses): Faculty(firstName,lastName,address,IDNumber,SSN,department),
-                                                                                                                       PerCourse(feePerCourse),
-                                                                                                                       PartTime(maxHours), _maxCourses(maxCourses){}
-    void output(ostream& out) const { out << *this; }
-    Adjunct(int maxCourses): _maxCourses(maxCourses){}
-    friend ostream& operator<< (ostream&, const Adjunct&);
+	Adjunct() : Faculty(), PerCourse(), PartTime(), _maxCourses(0) {}
+	Adjunct(string firstName, string lastName, string address, unsigned IDNumber,
+		string SSN, string department, unsigned int feePerCourse, unsigned int maxHours, unsigned int maxCourses) : Faculty(firstName, lastName, address, IDNumber, SSN, department),
+		PerCourse(feePerCourse),
+		PartTime(maxHours), _maxCourses(maxCourses) {}
+	void output(ostream& out) const { out << *this; }
+	Adjunct(int maxCourses) : _maxCourses(maxCourses) {}
+	friend ostream& operator<< (ostream&, const Adjunct&);
+	int get_maxCourses() const { return _maxCourses; }
 private:
-    unsigned int _maxCourses;
+	unsigned int _maxCourses;
 };
 
-
 UMLPerson::UMLPerson(const UMLPerson& p) {
-    // make an independent copy of any dynamic member variables of UMLPerson here
-    _firstName = p._firstName;
-    _lastName  = p._lastName;
-    _address = p._address;
-    _IDNumber_ = p._IDNumber_;
-    cout << "UMLPerson copy constructor called for \"" << _firstName << " " << _lastName << "\"\n";
+	// make an independent copy of any dynamic member variables of UMLPerson here
+	_firstName = p._firstName;
+	_lastName = p._lastName;
+	_address = p._address;
+	_IDNumber_ = p._IDNumber_;
+	cout << "UMLPerson copy constructor called for \"" << _firstName << " " << _lastName << "\"\n";
 }
 
 UMLPerson::~UMLPerson() {
@@ -309,22 +314,22 @@ UMLPerson::~UMLPerson() {
 }
 
 Student::Student(string firstName, string lastName, string address, unsigned _IDNumber,
-                 double GPA, string smajor, string advisorName)
+	double GPA, string smajor, string advisorName)
 	: UMLPerson(firstName, lastName, address, _IDNumber)
 {
 	_GPA = GPA;
-    _smajor = smajor;
+	_smajor = smajor;
 	_advisorName = advisorName;
 }
 
 Student::Student(const Student& s) : UMLPerson(s) {
-    // make an independent copy of any dynamic member variables of Student here
-    _GPA = s._GPA;
-    _smajor = s._smajor;
-    _advisorName = s._advisorName;
+	// make an independent copy of any dynamic member variables of Student here
+	_GPA = s._GPA;
+	_smajor = s._smajor;
+	_advisorName = s._advisorName;
 
-    cout << "Student copy constructor called for \""
-		 << s.getFirstName() << " " << s.getLastName() << "\"\n";
+	cout << "Student copy constructor called for \""
+		<< s.getFirstName() << " " << s.getLastName() << "\"\n";
 }
 
 Student::~Student() {
@@ -333,18 +338,18 @@ Student::~Student() {
 }
 
 Undergrad::Undergrad(string firstName, string lastName, string address, unsigned _IDNumber,
-                     double GPA, string smajor, string advisorName, string classRank)
+	double GPA, string smajor, string advisorName, string classRank)
 	: Student(firstName, lastName, address, _IDNumber, GPA, smajor, advisorName)
 {
 	_classRank = classRank;
 }
 
 Undergrad::Undergrad(const Undergrad& u) : Student(u) {
-    // make an independent copy of any dynamic member variables of Student here
-    _classRank = u._classRank;
+	// make an independent copy of any dynamic member variables of Student here
+	_classRank = u._classRank;
 
-    cout << "Undergrad copy constructor called for \""
-		 << u.getFirstName() << " " << u.getLastName() << "\"\n";
+	cout << "Undergrad copy constructor called for \""
+		<< u.getFirstName() << " " << u.getLastName() << "\"\n";
 }
 
 Undergrad::~Undergrad() {
@@ -353,20 +358,20 @@ Undergrad::~Undergrad() {
 }
 
 Grader::Grader(string firstName, string lastName, string address, unsigned _IDNumber,
-               double GPA, string smajor, string advisorName, string classRank,
-			   string classNumber, unsigned hourlyRate)
+	double GPA, string smajor, string advisorName, string classRank,
+	string classNumber, unsigned hourlyRate)
 	: Undergrad(firstName, lastName, address, _IDNumber, GPA, smajor, advisorName, classRank),
-	  Hourly(hourlyRate)
+	Hourly(hourlyRate)
 {
 	_classNumber = classNumber;
 }
 
 Grader::Grader(const Grader& g) : Undergrad(g), Hourly(g) {
-    // make an independent copy of any dynamic member variables of Student here
-    _classNumber = g._classNumber;
+	// make an independent copy of any dynamic member variables of Student here
+	_classNumber = g._classNumber;
 
-    cout << "Grader copy constructor called for \""
-		 << g.getFirstName() << " " << g.getLastName() << "\"\n";
+	cout << "Grader copy constructor called for \""
+		<< g.getFirstName() << " " << g.getLastName() << "\"\n";
 }
 
 Grader::~Grader() {
@@ -375,21 +380,21 @@ Grader::~Grader() {
 }
 
 Employee::Employee(string firstName, string lastName, string address, unsigned _IDNumber,
-                   string SSN)
+	string SSN)
 	: UMLPerson(firstName, lastName, address, _IDNumber)
 {
 	_SSN = SSN;
 }
 
 Faculty::Faculty(string firstName, string lastName, string address, unsigned _IDNumber,
-                 string SSN, string department)
+	string SSN, string department)
 	: Employee(firstName, lastName, address, _IDNumber, SSN)
 {
 	_department = department;
 }
 
 NTT::NTT(string firstName, string lastName, string address, unsigned _IDNumber,
-         string SSN, string department, string rank, unsigned salary)
+	string SSN, string department, string rank, unsigned salary)
 	: Faculty(firstName, lastName, address, _IDNumber, SSN, department), Salaried(salary)
 {
 	_rank = rank;
@@ -397,98 +402,96 @@ NTT::NTT(string firstName, string lastName, string address, unsigned _IDNumber,
 
 
 ostream& operator<< (ostream& out, const UMLPerson& p) {
-    out << "First Name:\t" << p._firstName << endl
-        << "Last Name:\t" << p._lastName << endl
-        << "Address:\t" << p._address << endl
-        << "ID Number:\t" << p._IDNumber_ << endl;
+	out << "First Name:\t" << p._firstName << endl
+		<< "Last Name:\t" << p._lastName << endl
+		<< "Address:\t" << p._address << endl
+		<< "ID Number:\t" << p._IDNumber_ << endl;
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const Student& s) {
 	s.UMLPerson::output(out); // display the UMLPerson variables
 
-    out << "GPA:\t\t" << s.getGPA() << endl
-        << "Major:\t\t" << s.getSmajor() << endl
-        << "Advisor Name:\t" << s.getAdvisorName() << endl;
+	out << "GPA:\t\t" << s._GPA << endl
+		<< "Major:\t\t" << s._smajor << endl
+		<< "Advisor Name:\t" << s._advisorName << endl;
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const Undergrad& u) {
 	u.Student::output(out); // display the Student variables
 
-    out << "Class Rank:\t" << u.getClassRank() << endl;
+	out << "Class Rank:\t" << u._classRank << endl;
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const Grader& u) {
 	u.Undergrad::output(out); // display the Student variables
 
-    out << "Class Number:\t" << u.getClassNumber() << endl;
+	out << "Class Number:\t" << u._classNumber << endl;
 
 	u.Hourly::output(out); // display the Hourly variables
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const Employee& e) {
 	e.UMLPerson::output(out); // display the UMLPerson variables
 
-    out << "SSN:\t\t" << e.getSSN() << endl;
+	out << "SSN:\t\t" << e._SSN << endl;
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const Faculty& f) {
 	f.Employee::output(out); // display the Employee variables
 
-    out << "Department:\t" << f.getDepartment() << endl;
+	out << "Department:\t" << f._department << endl;
 
-    return out;
+	return out;
 }
 
 ostream& operator<< (ostream& out, const NTT& n) {
 	n.Faculty::output(out); // display the Faculty variables
 
-    out << "Rank:\t\t" << n.getRank() << endl;
+	out << "Rank:\t\t" << n._rank << endl;
 
 	n.Salaried::output(out); // display the Salary variables
 
-    return out;
+	return out;
 }
 
-ostream& operator<< (ostream& out, const EmployeeKind&)
+ostream& operator<< (ostream& out, const PerCourse& c)
 {
-    out << "EmployeeKind (no member variables)\n" << endl;
-
-    return out;
-}
-ostream& operator<< (ostream& out, const Adjunct& a){
-    a.Faculty::output(out);
-    a.PerCourse::output(out);
-    a.PartTime::output(out);
-    out << "Max Courses: 2" << endl;
-    return out;
+	return out << "Fee Per Course: " << c._feePerCourse << endl;
 }
 
-ostream& operator<< (ostream& out, const PartTime& a) {
-    a.EmployeeKind::output(out);
-    out << "Max Hours: " << a.getHours() << endl;
+ostream& operator<< (ostream& out, const Adjunct& a) {
+	a.Faculty::output(out);
+	a.PerCourse::output(out);
+	a.PartTime::output(out);
+	return out << "Max Courses:\t" << a._maxCourses << endl;
+}
 
+ostream& operator<< (ostream& out, const PartTime& p) {
+	return out << "Max Hours:\t" << p._maxHours << endl;
+}
+
+ostream& operator<< (ostream& out, const EmployeeKind& e)
+{
+	return out << "EmployeeKind (no member variables)\n" << endl;
 }
 
 
-
-
-
-int main (void) {
+int main(void) {
 	UMLPerson p;
 	cout << "UMLPerson():\n" << p << endl;
 
-    Student s;
-    cout << "Student():\n" << s << endl;
+	Student s;
+	cout << "Student():\n" << s << endl;
 
 	Undergrad u;
 	cout << "Undergrad():\n" << u << endl;
@@ -496,26 +499,27 @@ int main (void) {
 	Grader g;
 	cout << "Grader():\n" << g << endl;
 
-    Undergrad s1("Sally", "Brown", "110 Canal Street", 12345678, 4.0, "CS", "Tom Wilkes", "senior");
-    Undergrad s2("Jimmy", "Smith", "99 Canal Street", 87654321, 3.0, "CS", "Tom Wilkes", "freshman");
+	Undergrad s1("Sally", "Brown", "110 Canal Street", 12345678, 4.0, "CS", "Tom Wilkes", "senior");
+	Undergrad s2("Jimmy", "Smith", "99 Canal Street", 87654321, 3.0, "CS", "Tom Wilkes", "freshman");
 
-    cout << "Undergrad s1(Sally...):\n" << s1 << endl;
+	cout << "Undergrad s1(Sally...):\n" << s1 << endl;
 	cout << "Undergrad s2(Jimmy...):\n" << s2 << endl;
 
 	Grader g1("John", "Doe", "89 Canal Street", 54329876, 3.5, "CS", "Tom Wilkes", "junior",
-			  "COMP.2010", 25.00);
+		"COMP.2010", 25.00);
 	cout << "Grader g1(John...):\n" << g1 << endl;
 
 	Grader g2(g1); // invoke copy constructor
 	cout << "Grader g2(copy of g1 - John...):\n" << g2 << endl;
 
-    Adjunct a1("Jane", "Doe", "123 University Ave", 98765432, "987-65-4321", "Mathematics", 3000, 20, 2);
+	Adjunct a1("Jane", "Doe", "123 University Ave", 98765432, "987-65-4321", "Mathematics", 3000, 20, 2);
+	cout << "Adjunct a1(Jane...):\n" << a1 << endl;
 
-    //Grader g3("Alice", "Johnson", "321 College Rd", 11223344, 3.8, "Physics", "Dr. Brown", )
+	Grader g3("Alice", "Johnson", "321 College Rd", 11223344, 3.8, "Physics", "Dr. Brown", "sophomore", "PHYS.1010", 20);
+	cout << "Grader g3(Alice...):\n" << g3 << endl;
 
 	NTT n1("Tom", "Wilkes", "Foo Street", 52901256, "123-45-6789", "Computer Science", "Assistant Teaching Professor", 12345);
 	cout << "NTT Faculty n1(Tom...):\n" << n1 << endl;
 
-    return 0;
+	return 0;
 }
-
